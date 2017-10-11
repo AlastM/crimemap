@@ -3,40 +3,7 @@
 <html>
   <head>
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <script type="text/javascript"
-    src="https://maps.googleapis.com/maps/api/js">
-  </script>
-  
-  <script type="text/javascript">
-    
-    var map;
-    var marker;
-    function initialize() { 
-      var mapOptions = {
-      center: new google.maps.LatLng(-33.30578381949298, 26.523442268371582),
-      zoom: 15
-      };
-      map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
-      google.maps.event.addListener(map, 'click', function(event){  
-        placeMarker(event.latLng);
-      });
-    }
-  
-    function placeMarker(location) {
-      if (marker) {
-        marker.setPosition(location);
-      } else {
-       marker = new google.maps.Marker({
-         position: location,
-         map: map
-       });
-      }
-      document.getElementById('latitude').value = location.lat()
-      document.getElementById('longitude').value = location.lng()
-    }
-  </script>
-    
-</head>
+    </head>
   <body onload="initialize()">
     <h1>CrimeMap</h1>
     <p>A map of recent criminal activity in the Grahamstown area.</p>
@@ -61,5 +28,36 @@
       <input type="submit" value="Submit">
       </form>
     </div>
+      <script>
+        
+        var map;
+        var marker;
+        function initialize() { 
+          var mapOptions = {
+          center: new google.maps.LatLng(-33.30578381949298, 26.523442268371582),
+          zoom: 15
+          };
+          map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+          google.maps.event.addListener(map, 'click', function(event){  
+            placeMarker(event.latLng);
+          });
+        }
+      
+        function placeMarker(location) {
+          if (marker) {
+            marker.setPosition(location);
+          } else {
+           marker = new google.maps.Marker({
+             position: location,
+             map: map
+           });
+          }
+          document.getElementById('latitude').value = location.lat()
+          document.getElementById('longitude').value = location.lng()
+        }
+        </script>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBG-2HHHZg6GE30VktRHOlj4XMa-5zwANE&callback=initialize">
+        </script>
   </body>
 </html>
