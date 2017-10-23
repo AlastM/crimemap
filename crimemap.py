@@ -1,3 +1,4 @@
+import json
 from flask import Flask
 from flask import render_template
 from flask import request
@@ -12,7 +13,7 @@ app = Flask(__name__)
 DB = DBHelper()
 
 
-@app.route("/")
+''' @app.route("/")
 def home():
     try:
         data = DB.get_all_inputs()
@@ -20,6 +21,13 @@ def home():
         print e
         data = None
     return render_template("home.html", data=data)
+ '''
+
+@app.route("/")
+def home():
+  crimes = DB.get_all_crimes()
+  crimes = json.dumps(crimes)
+  return render_template("home.html", crimes=crimes)
 
 @app.route("/submitcrime", methods=['POST'])
 def submitcrime():
